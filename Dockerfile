@@ -6,7 +6,7 @@ FROM iidlx/ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
-RUN git clone https://github.com/denverwilliams/Hanlon -b linuxkit /home/hanlon
+RUN git clone https://github.com/denverwilliams/Hanlon.git -b linuxkit /home/hanlon
 RUN git submodule update --init --recursive
 
 #AFTPD
