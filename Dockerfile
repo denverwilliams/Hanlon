@@ -26,7 +26,7 @@ RUN cp atftpd/ipxe/undionly-debug.kpxe /
 RUN cp atftpd/ipxe/undionly.kpxe /
 
 RUN apt-get -y update \
-    && apt-get -y install ansible wget tmate \
+    && apt-get -y install ansible wget \
     # && /usr/bin/ansible-playbook -c local -i localhost, /build.yml \ Disable for arm
     && /usr/bin/ansible-playbook -c local -i localhost, /atftp.yml \
     && apt-get -y purge ansible \
@@ -106,6 +106,8 @@ ENV HANLON_WEB_PATH /home/hanlon/web
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
+# Tmate
+RUN apt update && apt -y install tmate
 
 # Hanlon by default runs at TCP 8026
 EXPOSE 8026
