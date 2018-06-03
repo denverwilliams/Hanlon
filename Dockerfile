@@ -6,7 +6,7 @@ FROM iidlx/ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
-RUN git clone https://gitlab.ii.org.nz/iichip/Hanlon.git -b linuxkit /home/hanlon
+RUN git clone https://github.com/denverwilliams/Hanlon -b linuxkit /home/hanlon
 RUN git submodule update --init --recursive
 
 #AFTPD
@@ -26,7 +26,7 @@ RUN cp atftpd/ipxe/undionly-debug.kpxe /
 RUN cp atftpd/ipxe/undionly.kpxe /
 
 RUN apt-get -y update \
-    && apt-get -y install ansible wget \
+    && apt-get -y install ansible wget tmate \
     # && /usr/bin/ansible-playbook -c local -i localhost, /build.yml \ Disable for arm
     && /usr/bin/ansible-playbook -c local -i localhost, /atftp.yml \
     && apt-get -y purge ansible \
@@ -97,7 +97,8 @@ RUN echo "install: --no-rdoc --no-ri" > /etc/gemrc
 RUN gem install bundle \
   && gem install pry-byebug \
 	&& cd /home/hanlon \
-	&& bundle install --system
+	&& bundle install --system \ 
+        && gem install bson_ext
 
 ENV WIMLIB_IMAGEX_USE_UTF8 true
 ENV HANLON_WEB_PATH /home/hanlon/web
