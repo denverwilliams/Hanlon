@@ -1,8 +1,0 @@
----
-server:
-  image: "hanlon:latest"
-  ports: 
-    - 8026:8026
-    - 69:69/udp
-  privileged: true
-  env_file: hanlon.env
